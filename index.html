@@ -1,5 +1,5 @@
-<canvas width = 100vw
-        height = 100vh
+<canvas width = 1600
+        height = 900
 	id = canvas
         style = background-color:white;></canvas>
 	
@@ -47,7 +47,7 @@ canvas.onmousemove = event => {
 }
 function draw() {
 	
-	drawing.clearRect(0, 0, 100vw, 100vh)
+	drawing.clearRect(0, 0, 1600, 900)
 	
 	drawing.drawImage(image, player.X - 50, player.Y - 50, 100, 100)
 	drawing.drawImage(image2, banana.X - 25, banana.Y - 25, 50, 50)
@@ -64,8 +64,8 @@ setInterval(() => {
 	if (distance(player, banana) < 40) {
 		player.points = player.points + 1
 		while (distance(player, banana) < 100) {
-			banana.X = Math.random()*100vw
-			banana.Y = Math.random()*100vh
+			banana.X = Math.random()*1600
+			banana.Y = Math.random()*900
 		}
 	}
 	if (distance(player, enemy) < 50) {
