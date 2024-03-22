@@ -1,5 +1,5 @@
-<canvas width = 800
-        height = 600
+<canvas width = 1920
+        height = 1080
 	id = canvas
         style = background-color:white;></canvas>
 	
@@ -64,8 +64,8 @@ setInterval(() => {
 	if (distance(player, banana) < 40) {
 		player.points = player.points + 1
 		while (distance(player, banana) < 100) {
-			banana.X = Math.random()*800
-			banana.Y = Math.random()*600
+			banana.X = Math.random()*1920
+			banana.Y = Math.random()*1080
 		}
 	}
 	if (distance(player, enemy) < 50) {
