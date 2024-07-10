@@ -1,0 +1,81 @@
+<canvas width = 1200
+        height = 650
+	id = canvas
+        style = background-color:white;></canvas>
+	
+<script>
+function distance(character1, character2) {
+	const dx = character1.X - character2.X
+	const dy = character1.Y - character2.Y
+	return Math.sqrt(dx*dx + dy*dy)
+}
+function move(character1, character2, speed) {
+	const dx = character2.X - character1.X
+	const dy = character2.Y - character1.Y
+	const e = distance(character2, character1)
+	
+	character1.X += dx/e*speed
+	character1.Y += dy/e*speed
+}
+var drawing = canvas.getContext("2d")
+const player = {
+	X: 100,
+	Y: 100,
+	points: 0,
+}
+const enemy = {
+	X:400,
+	Y:300,
+}
+const banana = {
+	X:50,
+	Y:50,
+}
+const image = new Image()
+image.src = "Fridge.png"
+const image2 = new Image()
+image2.src = "Golden Banan.png"
+const image3 = new Image()
+image3.src = "moai.png"
+const mouse = {
+	X: 0,
+	Y: 0,
+}
+canvas.onmousemove = event => {
+	mouse.X = event.offsetX
+	mouse.Y = event.offsetY
+}
+function draw() {
+	
+	drawing.clearRect(0, 0, 1200, 650)
+	
+	drawing.drawImage(image, player.X - 50, player.Y - 50, 100, 100)
+	drawing.drawImage(image2, banana.X - 25, banana.Y - 25, 50, 50)
+	drawing.drawImage(image3, enemy.X - 50, enemy.Y - 50, 100, 100)
+	drawing.fillText("Points: " + player.points, 10, 20)
+	requestAnimationFrame(draw)
+}
+
+requestAnimationFrame(draw)
+
+setInterval(() => {
+	move(player, mouse, 2)
+	move(enemy, player, 0.5)
+	if (distance(player, banana) < 40) {
+		player.points = player.points + 10
+		while (distance(player, banana) < 100) {
+			banana.X = Math.random()*1200
+			banana.Y = Math.random()*650
+		}
+	}
+	if (distance(player, enemy) < 50) {
+		player.points = 0
+		player.X = 100
+		player.Y = 100
+		enemy.X = 400
+		enemy.Y = 300
+		banana.X = 50
+		banana.Y = 50
+	}
+}, 10)
+</script>
